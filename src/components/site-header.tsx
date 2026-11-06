@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, MoveUpRight, Ship, X } from "lucide-react";
+import { Menu, MoveUpRight, X } from "lucide-react";
 import { useState } from "react";
+import logo from "../assets/logo.png";
 import { Button } from "@/components/ui/button";
 
 const links = [
@@ -10,6 +11,10 @@ const links = [
   ["Track", "/track"],
   ["Contact", "/contact"],
 ] as const;
+
+function BrandLogo() {
+  return <img className="brand-logo" src={logo} alt="Meridian Freight" />;
+}
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -22,12 +27,7 @@ export function SiteHeader() {
           aria-label="Meridian Freight home"
           onClick={() => setOpen(false)}
         >
-          <span className="brand-mark">
-            <Ship size={19} strokeWidth={1.8} />
-          </span>
-          <span className="brand-name">
-            MERIDIAN<span>FREIGHT</span>
-          </span>
+          <BrandLogo />
         </Link>
         <nav
           id="primary-navigation"
@@ -67,12 +67,7 @@ export function SiteFooter() {
       <div className="page-shell footer-main">
         <div className="footer-brand">
           <Link to="/" className="brand-lockup">
-            <span className="brand-mark">
-              <Ship size={19} />
-            </span>
-            <span className="brand-name">
-              MERIDIAN<span>FREIGHT</span>
-            </span>
+            <BrandLogo />
           </Link>
           <p>Moving business forward, one carefully planned shipment at a time.</p>
         </div>
