@@ -121,7 +121,7 @@
 .eyebrow { color: var(--steel); text-transform: uppercase; font: 600 10px/1.4 var(--font-sans); letter-spacing: 0.13em; display: flex; align-items: center; gap: 10px; margin: 0 0 23px; }
 .eyebrow > span { width: 22px; height: 1px; background: var(--electric); display: inline-block; }
 .eyebrow-light { color: color-mix(in oklab, var(--primary-foreground) 72%, transparent); }
-.home-hero h1 { max-width: 800px; font-size: clamp(58px, 7.8vw, 104px); line-height: .94; font-weight: 500; letter-spacing: 0; margin: 0; text-transform: uppercase; }
+.home-hero h1 { max-width: 1100px; font-size: clamp(58px, 7vw, 92px); line-height: .94; font-weight: 500; letter-spacing: -.02em; margin: 0; text-transform: uppercase; }
 .home-hero h1 span { color: color-mix(in oklab, var(--primary-foreground) 69%, transparent); }
 .hero-content > p { color: color-mix(in oklab, var(--primary-foreground) 78%, transparent); margin: 26px 0 26px; max-width: 450px; font-size: 15px; line-height: 1.7; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
@@ -129,7 +129,6 @@
 .button-electric:hover, .nav-quote:hover { background: color-mix(in oklab, var(--electric) 84%, var(--hero-ink)); }
 .button-electric[data-size="lg"], .hero-actions .button { height: 48px; padding-inline: 20px; font-size: 12px; }
 .hero-actions .button { border-radius: 2px; }
-.hero-actions .button[data-variant="hero-outline"] { border: 1px solid color-mix(in oklab, var(--primary-foreground) 54%, transparent); color: var(--primary-foreground); background: transparent; }
 .hero-caption { position: absolute; left: 0; bottom: -133px; display: flex; align-items: center; gap: 10px; text-transform: uppercase; font-size: 9px; letter-spacing: .08em; color: var(--light-copy); }
 .caption-line { width: 28px; height: 1px; background: var(--electric); }
 .scroll-cue { position: absolute; right: max(32px, calc((100vw - 1280px)/2)); bottom: 34px; color: var(--primary-foreground); text-decoration: none; display: flex; align-items: center; gap: 14px; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
@@ -199,7 +198,6 @@
 .network-content h2 { font-size: clamp(43px, 5vw, 66px); }
 .network-content > div:first-child > p { max-width: 420px; color: var(--light-copy); font-size: 13px; line-height: 1.75; margin: 21px 0 24px; }
 .network-content .button { border-radius: 2px; height: 42px; font-size: 11px; }
-.button[data-variant="hero-outline"] { border: 1px solid color-mix(in oklab, var(--primary-foreground) 38%, transparent); background: transparent; color: var(--primary-foreground); }
 .map-illustration { border: 1px solid var(--dark-border); background: color-mix(in oklab, var(--primary) 38%, var(--hero-ink)); padding: 20px 22px 17px; min-width: 0; }
 .map-topline { display: flex; justify-content: space-between; align-items: center; color: var(--light-copy); font-size: 8px; letter-spacing: .1em; }
 .map-topline > span { display: flex; align-items: center; gap: 8px; }
@@ -475,5 +473,63 @@
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+.site-header { backdrop-filter: blur(12px); background: color-mix(in oklab, var(--hero-ink) 35%, transparent); }
+.brand-mark { transition: color .3s ease, border-color .3s ease, transform .3s cubic-bezier(.2,.8,.2,1); }
+.brand-lockup:hover .brand-mark { color: var(--primary-foreground); border-color: var(--electric); transform: rotate(-6deg); }
+.nav-link { position: relative; }
+.nav-link::after { content: ""; position: absolute; inset: auto 0 -7px; height: 1px; background: var(--electric); transform: scaleX(0); transform-origin: left; transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.nav-link:hover::after, .nav-link[data-status="active"]::after { transform: scaleX(1); }
+.hero-content > .eyebrow, .hero-content > h1, .hero-content > p, .hero-content > .hero-actions { animation: hero-rise .85s cubic-bezier(.2,.7,.2,1) both; }
+.hero-content > .eyebrow { animation-delay: .08s; }
+.hero-content > h1 { animation-delay: .18s; }
+.hero-content > p { animation-delay: .3s; }
+.hero-content > .hero-actions { animation-delay: .4s; }
+.hero-caption { animation: fade-in .8s .65s both; }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(24px); filter: blur(5px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.site-shell main { animation: main-enter .7s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes main-enter { from { opacity: .7; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@supports (animation-timeline: view()) {
+  .site-shell main > section:not(.home-hero) {
+    animation-name: section-reveal;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 32%;
+  }
+  @keyframes section-reveal { from { opacity: .35; transform: translateY(28px); filter: blur(3px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+}
+.service-feature { transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease; }
+.service-feature:hover, .service-feature:focus-visible { transform: translateY(-7px); box-shadow: 0 22px 50px color-mix(in oklab, var(--hero-ink) 19%, transparent); }
+.service-photo { will-change: transform; }
+.service-feature:hover .service-arrow, .service-feature:focus-visible .service-arrow { color: var(--electric); border-color: var(--electric); transform: translate(3px, -3px); }
+.service-arrow { transition: color .25s ease, border-color .25s ease, transform .25s ease; }
+.button, .nav-quote { transition: transform .24s cubic-bezier(.2,.8,.2,1), background-color .24s ease, color .24s ease, border-color .24s ease; }
+.button:hover, .nav-quote:hover { transform: translateY(-2px); }
+.button:active, .nav-quote:active { transform: translateY(0) scale(.98); }
+.map-points circle { transform-box: fill-box; transform-origin: center; animation: map-pulse 2.8s ease-in-out infinite; }
+.map-points circle:nth-child(2n) { animation-delay: .7s; }
+@keyframes map-pulse { 50% { filter: drop-shadow(0 0 5px var(--map-point)); transform: scale(1.35); } }
+.journey-rule::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 100%; background: color-mix(in oklab, var(--electric) 40%, var(--section-rule)); transform: scaleX(0); transform-origin: left; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.journey-step:hover .journey-rule::after { transform: scaleX(1); }
+.journey-step { transition: transform .3s ease; }
+.journey-step:hover { transform: translateY(-4px); }
+.quote-step > span { transition: transform .3s ease, box-shadow .3s ease; }
+.quote-step.active > span { box-shadow: 0 0 0 5px color-mix(in oklab, var(--electric) 14%, transparent); transform: scale(1.05); }
+.tracking-result, .tracking-error { animation: result-enter .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes result-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.field input, .field select, .field textarea, .tracking-search { transition: border-color .2s ease, box-shadow .2s ease; }
+.field input:focus, .field select:focus, .field textarea:focus, .tracking-search:focus-within { border-color: var(--electric); box-shadow: 0 0 0 3px color-mix(in oklab, var(--electric) 12%, transparent); }
+:where(a, button, input, select, textarea):focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+
+@media (max-width: 680px) {
+  .site-nav { display: flex; max-height: 0; overflow: hidden; visibility: hidden; padding-block: 0; border-bottom-color: transparent; transition: max-height .4s cubic-bezier(.2,.7,.2,1), padding .3s ease, visibility .4s; }
+  .site-nav.is-open { max-height: 430px; visibility: visible; padding-block: 18px 23px; border-bottom-color: var(--dark-border); }
+}
+
+@media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

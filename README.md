@@ -1,24 +1,23 @@
-# Pixel Perfect Replica (34)
+# Meridian Freight
 
-Implement exactly the screenshot and nothing else
+A responsive freight and logistics marketing-site prototype built with TanStack Start. It includes overview, services, network, shipment tracking, quote request, about, and contact pages.
 
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/a6da575c-f2df-4664-bd19-89ce3d4f480b).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+Tracking records, service capabilities, network routes, and company details are illustrative. Quote and contact forms only prepare data locally; no carrier or submission service is connected.
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+npm install
 npm run dev
 ```
+
+## Checks
+
+```sh
+npm test
+npm run lint
+npm run build
+npm run preview
+```
+
+Run `npm run build` before `npm run preview`; the preview command serves the Cloudflare-targeted Nitro output with Wrangler.
