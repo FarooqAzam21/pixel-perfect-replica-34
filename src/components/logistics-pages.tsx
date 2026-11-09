@@ -406,12 +406,10 @@ export function HomePage() {
         <div className="hero-overlay" aria-hidden="true" />
         <div className="page-shell hero-content">
           <Eyebrow light>{company.name}</Eyebrow>
-          <h1>
-            Connecting
-            <br />
-            businesses
-            <br />
-            <span>across borders.</span>
+          <h1 className="hero-title" aria-label="Connecting businesses across borders">
+            <span className="hero-title-line">Connecting</span>
+            <span className="hero-title-line">businesses</span>
+            <span className="hero-title-line hero-title-accent">across borders.</span>
           </h1>
           <p>
             {company.tagline}. Safe, reliable, on time, worldwide — with global reach and local
@@ -497,7 +495,14 @@ export function HomePage() {
               key={service.id}
               className={`service-feature feature-${(index % 3) + 1}`}
             >
-              <div className="service-photo" style={{ backgroundImage: `url(${service.image})` }} />
+              <img
+                className="service-photo"
+                src={service.image}
+                alt=""
+                loading={index < 3 ? "eager" : "lazy"}
+                width={1440}
+                height={960}
+              />
               <div className="service-feature-content">
                 <span className="service-number">
                   {service.number} <service.icon size={17} />
@@ -1016,19 +1021,29 @@ const inputFields: {
   options?: string[];
 }[] = [
   { name: "mode", label: "Shipment type", options: ["Ocean", "Air", "Land"] },
-  { name: "originCountry", label: "Origin country", placeholder: "Country", required: true },
-  { name: "originCity", label: "Origin city", placeholder: "City", required: true },
   {
-    name: "destinationCountry",
-    label: "Destination country",
+    name: "originCountry",
+    label: "Port of loading — country",
     placeholder: "Country",
     required: true,
   },
-  { name: "destinationCity", label: "Destination city", placeholder: "City", required: true },
+  { name: "originCity", label: "Port of loading — city", placeholder: "City", required: true },
+  {
+    name: "destinationCountry",
+    label: "Port of discharge — country",
+    placeholder: "Country",
+    required: true,
+  },
+  {
+    name: "destinationCity",
+    label: "Port of discharge — city",
+    placeholder: "City",
+    required: true,
+  },
   {
     name: "cargo",
-    label: "Cargo description",
-    placeholder: "What are you shipping?",
+    label: "Commodity",
+    placeholder: "Describe the commodity",
     required: true,
   },
   {
@@ -1217,16 +1232,18 @@ export function QuotePage() {
                   <div className="review-block">
                     <span>SHIPMENT</span>
                     <p>
-                      <strong>{details.mode} freight</strong> · {details.originCity},{" "}
-                      {details.originCountry} → {details.destinationCity},{" "}
-                      {details.destinationCountry}
+                      <strong>{details.mode} freight</strong> · Port of loading:{" "}
+                      {details.originCity}, {details.originCountry} → Port of discharge:{" "}
+                      {details.destinationCity}, {details.destinationCountry}
                     </p>
                     <p>
-                      {details.cargo} · {details.weight} kg · {details.packages} packages
+                      Commodity: {details.cargo} · {details.weight} kg · {details.packages} packages
                     </p>
-                    {details.dimensions && (
+                    {(details.dimensions || details.container) && (
                       <p>
-                        {details.dimensions} · {details.container}
+                        {details.dimensions && <>Dimensions: {details.dimensions}</>}
+                        {details.dimensions && details.container && " · "}
+                        {details.container && <>Container Type: {details.container}</>}
                       </p>
                     )}
                     <Button type="button" variant="link" onClick={() => setStep(0)}>
