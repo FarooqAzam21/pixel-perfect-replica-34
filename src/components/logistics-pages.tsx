@@ -30,6 +30,9 @@ import {
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import portImage from "@/assets/global-port-hero.jpg";
 import airImage from "@/assets/air-freight.jpg";
+import containerShipImage from "@/assets/container-ship.jpg";
+import freightTruckImage from "@/assets/freight-truck.jpg";
+import airCargoImage from "@/assets/air-cargo-loading.jpg";
 import shipVideo from "@/assets/Cargo_ship_sailing_ocean_62d7a438.mp4";
 import warehouseImage from "@/assets/warehouse.jpg";
 import { Button } from "@/components/ui/button";
@@ -52,7 +55,7 @@ const services = [
     detail: "Fast · Reliable · Global markets",
     text: "Fast and reliable air freight solutions connecting major global markets. We ensure speedy delivery with real-time tracking and end-to-end service.",
     icon: Plane,
-    image: airImage,
+    image: airCargoImage,
   },
   {
     id: "global-air-charter",
@@ -79,7 +82,7 @@ const services = [
     detail: "Documentation · Regulatory compliance",
     text: "Streamline your international shipments with expert customs brokerage. We handle all documentation and regulatory compliance to ensure smooth border crossings.",
     icon: ShieldCheck,
-    image: warehouseImage,
+    image: containerShipImage,
   },
   {
     id: "overland-transport",
@@ -88,7 +91,7 @@ const services = [
     detail: "Road · Rail · Cross-border",
     text: "Comprehensive road and rail logistics for domestic and cross-border shipments. We guarantee secure, timely, and scalable ground transport solutions.",
     icon: Truck,
-    image: warehouseImage,
+    image: freightTruckImage,
   },
   {
     id: "international-ocean-freight",
@@ -97,7 +100,7 @@ const services = [
     detail: "FCL · LCL · Worldwide",
     text: "Cost-effective ocean freight services for FCL and LCL shipments worldwide. We offer flexible schedules, competitive rates, and full visibility throughout transit.",
     icon: Ship,
-    image: portImage,
+    image: containerShipImage,
   },
   {
     id: "third-party-logistics",
@@ -142,7 +145,7 @@ const services = [
     detail: "Oversized · Heavy-lift · Complex projects",
     text: "End-to-end logistics for oversized, heavy-lift, and complex project cargo. We provide customized solutions backed by expert planning and execution.",
     icon: Truck,
-    image: portImage,
+    image: freightTruckImage,
   },
   {
     id: "less-container-load",
@@ -151,7 +154,30 @@ const services = [
     detail: "Flexible · Consolidated ocean freight",
     text: "Flexible and economical LCL shipping options for smaller loads. Share space, save costs, and enjoy full visibility with our consolidated ocean freight services.",
     icon: Ship,
-    image: portImage,
+    image: containerShipImage,
+  },
+];
+const freightModes = [
+  {
+    number: "01",
+    name: "Ocean freight",
+    detail: "Cargo moving through a global port",
+    image: containerShipImage,
+    alt: "Container ship arriving at a working international port",
+  },
+  {
+    number: "02",
+    name: "Air freight",
+    detail: "Freight prepared for an aircraft",
+    image: airCargoImage,
+    alt: "Cargo pallets being loaded into an aircraft",
+  },
+  {
+    number: "03",
+    name: "Road transport",
+    detail: "A freight truck on a coastal highway",
+    image: freightTruckImage,
+    alt: "Freight truck traveling along a coastal highway",
   },
 ];
 const process = [
@@ -472,6 +498,29 @@ export function HomePage() {
           ))}
         </div>
         <p className="confirmation-note">Safe · Reliable · On time · Worldwide</p>
+      </section>
+      <section className="freight-modes-section">
+        <div className="page-shell">
+          <div className="freight-modes-heading">
+            <div>
+              <Eyebrow>Freight in motion</Eyebrow>
+              <h2>Across sea, air and road.</h2>
+            </div>
+            <p>Different ways to move cargo, brought together in one considered journey.</p>
+          </div>
+          <div className="freight-modes-grid">
+            {freightModes.map((mode) => (
+              <article className="freight-mode-card" key={mode.number}>
+                <img src={mode.image} alt={mode.alt} loading="lazy" width={1440} height={960} />
+                <div className="freight-mode-caption">
+                  <span>{mode.number} / FREIGHT MODE</span>
+                  <h3>{mode.name}</h3>
+                  <p>{mode.detail}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
       <section className="network-band">
         <div className="page-shell network-content">
