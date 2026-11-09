@@ -3,23 +3,27 @@ import {
   ArrowDown,
   ArrowRight,
   ArrowUpRight,
+  Boxes,
   Check,
   ChevronRight,
   CircleHelp,
-  Clock3,
   Globe2,
   Headphones,
+  Mail,
   MapPin,
   Menu,
   MoveUpRight,
-  Package,
   Pause,
+  Pill,
   Plane,
   Play,
   Search,
   ShieldCheck,
   Ship,
+  Target,
   Truck,
+  Thermometer,
+  TriangleAlert,
   Warehouse,
   X,
 } from "lucide-react";
@@ -38,60 +42,115 @@ import {
   validateShipment,
   type QuoteDetails,
 } from "@/lib/logistics";
+import { company, whatsappUrl } from "@/lib/company";
 
 const services = [
   {
-    id: "ocean",
+    id: "international-air-freight",
     number: "01",
-    title: "Ocean freight",
-    detail: "FCL · LCL · Port-to-port",
-    text: "A considered approach to sea freight, from full-container movements to consolidated cargo.",
-    icon: Ship,
-    image: portImage,
-  },
-  {
-    id: "air",
-    number: "02",
-    title: "Air freight",
-    detail: "International · Time-sensitive",
-    text: "Air cargo options designed around your delivery windows, cargo requirements and priorities.",
+    title: "International Air Freight",
+    detail: "Fast · Reliable · Global markets",
+    text: "Fast and reliable air freight solutions connecting major global markets. We ensure speedy delivery with real-time tracking and end-to-end service.",
     icon: Plane,
     image: airImage,
   },
   {
-    id: "land",
+    id: "global-air-charter",
+    number: "02",
+    title: "Global Air Charter Ops.",
+    detail: "Urgent · Oversized · Sensitive cargo",
+    text: "Tailored air charter solutions for urgent, oversized, or sensitive cargo. We offer 24/7 service and global coverage to meet your most critical transport needs.",
+    icon: Plane,
+    image: airImage,
+  },
+  {
+    id: "warehousing-distribution",
     number: "03",
-    title: "Land transport",
-    detail: "Domestic · Cross-border",
-    text: "Road transport planning for cargo that needs a dependable connection between destinations.",
-    icon: Truck,
-    image: warehouseImage,
-  },
-  {
-    id: "customs",
-    number: "04",
-    title: "Customs coordination",
-    detail: "Import · Export documentation",
-    text: "Documentation and clearance coordination to help cargo move through border procedures.",
-    icon: ShieldCheck,
-    image: warehouseImage,
-  },
-  {
-    id: "storage",
-    number: "05",
-    title: "Warehousing",
-    detail: "Storage · Cargo handling",
-    text: "Flexible storage and cargo handling options to support your supply chain planning.",
+    title: "Warehousing & Distribution",
+    detail: "Inventory · Fulfillment · Last-mile delivery",
+    text: "Strategic warehousing and distribution services designed for speed, flexibility, and accuracy. Our facilities support inventory management, fulfillment, and last-mile delivery.",
     icon: Warehouse,
     image: warehouseImage,
   },
   {
-    id: "project",
+    id: "customs-brokerage-clearance",
+    number: "04",
+    title: "Customs Brokerage & Clearance",
+    detail: "Documentation · Regulatory compliance",
+    text: "Streamline your international shipments with expert customs brokerage. We handle all documentation and regulatory compliance to ensure smooth border crossings.",
+    icon: ShieldCheck,
+    image: warehouseImage,
+  },
+  {
+    id: "overland-transport",
+    number: "05",
+    title: "Overland Transport",
+    detail: "Road · Rail · Cross-border",
+    text: "Comprehensive road and rail logistics for domestic and cross-border shipments. We guarantee secure, timely, and scalable ground transport solutions.",
+    icon: Truck,
+    image: warehouseImage,
+  },
+  {
+    id: "international-ocean-freight",
     number: "06",
-    title: "Project cargo",
-    detail: "Oversized · Special handling",
-    text: "Specialized movement planning for freight with unusual size, weight or handling needs.",
-    icon: Package,
+    title: "International Ocean Freight",
+    detail: "FCL · LCL · Worldwide",
+    text: "Cost-effective ocean freight services for FCL and LCL shipments worldwide. We offer flexible schedules, competitive rates, and full visibility throughout transit.",
+    icon: Ship,
+    image: portImage,
+  },
+  {
+    id: "third-party-logistics",
+    number: "07",
+    title: "Third Party Logistics",
+    detail: "Warehousing · Transportation · Supply chain",
+    text: "Integrated 3PL services combining warehousing, transportation, and supply chain management. We help you optimize operations, reduce costs, and scale efficiently.",
+    icon: Boxes,
+    image: warehouseImage,
+  },
+  {
+    id: "pharma-logistics",
+    number: "08",
+    title: "Pharma Logistics",
+    detail: "Temperature-controlled · Compliance",
+    text: "Secure, temperature-controlled logistics solutions for pharmaceutical products. We guarantee full regulatory compliance and product integrity at every step.",
+    icon: Pill,
+    image: warehouseImage,
+  },
+  {
+    id: "dangerous-goods",
+    number: "09",
+    title: "Dangerous Goods Handling",
+    detail: "Hazardous materials · Compliant transport",
+    text: "Safe and compliant transportation of hazardous materials. Our certified teams ensure meticulous handling, packaging, and documentation for all DG classes.",
+    icon: TriangleAlert,
+    image: warehouseImage,
+  },
+  {
+    id: "perishable-goods",
+    number: "10",
+    title: "Perishable Goods",
+    detail: "Cold chain · Temperature-sensitive",
+    text: "Specialized cold chain logistics for temperature-sensitive products. We maintain strict quality standards to preserve freshness from origin to destination.",
+    icon: Thermometer,
+    image: airImage,
+  },
+  {
+    id: "project-heavy-cargo",
+    number: "11",
+    title: "Project & Heavy Cargo",
+    detail: "Oversized · Heavy-lift · Complex projects",
+    text: "End-to-end logistics for oversized, heavy-lift, and complex project cargo. We provide customized solutions backed by expert planning and execution.",
+    icon: Truck,
+    image: portImage,
+  },
+  {
+    id: "less-container-load",
+    number: "12",
+    title: "Less Container Load",
+    detail: "Flexible · Consolidated ocean freight",
+    text: "Flexible and economical LCL shipping options for smaller loads. Share space, save costs, and enjoy full visibility with our consolidated ocean freight services.",
+    icon: Ship,
     image: portImage,
   },
 ];
@@ -306,15 +365,18 @@ export function HomePage() {
         </video>
         <div className="hero-overlay" aria-hidden="true" />
         <div className="page-shell hero-content">
-          <Eyebrow light>Global logistics · freight forwarding · supply chain</Eyebrow>
+          <Eyebrow light>{company.name}</Eyebrow>
           <h1>
             Connecting
             <br />
-            the world.
+            businesses
             <br />
-            <span>Moving business.</span>
+            <span>across borders.</span>
           </h1>
-          <p>Global freight solutions, thoughtfully coordinated from origin to destination.</p>
+          <p>
+            {company.tagline}. Safe, reliable, on time, worldwide — with global reach and local
+            support.
+          </p>
           <div className="hero-actions">
             <Button asChild size="lg" className="button-electric">
               <Link to="/quote">
@@ -329,7 +391,7 @@ export function HomePage() {
           </div>
           <div className="hero-caption">
             <span className="caption-line" />
-            Ocean freight · Illustrative footage
+            Safe · Reliable · On time · Worldwide
           </div>
         </div>
         <button
@@ -388,12 +450,12 @@ export function HomePage() {
           </Button>
         </div>
         <div className="service-editorial-grid">
-          {services.slice(0, 3).map((service, index) => (
+          {services.map((service, index) => (
             <Link
               to="/services"
               hash={service.id}
               key={service.id}
-              className={`service-feature feature-${index + 1}`}
+              className={`service-feature feature-${(index % 3) + 1}`}
             >
               <div className="service-photo" style={{ backgroundImage: `url(${service.image})` }} />
               <div className="service-feature-content">
@@ -401,7 +463,7 @@ export function HomePage() {
                   {service.number} <service.icon size={17} />
                 </span>
                 <h3>{service.title}</h3>
-                <p>{service.detail}</p>
+                <p>{service.text}</p>
                 <span className="service-arrow">
                   <ArrowUpRight size={17} />
                 </span>
@@ -409,10 +471,7 @@ export function HomePage() {
             </Link>
           ))}
         </div>
-        <p className="confirmation-note">
-          <CircleHelp size={14} /> Service capabilities shown for planning; confirm current
-          offerings with the company.
-        </p>
+        <p className="confirmation-note">Safe · Reliable · On time · Worldwide</p>
       </section>
       <section className="network-band">
         <div className="page-shell network-content">
@@ -485,6 +544,7 @@ export function HomePage() {
           </div>
         </div>
       </section>
+      <PrinciplesSection />
       <IndustrySection />
       <section className="insight-band">
         <div className="page-shell insight-layout">
@@ -653,6 +713,50 @@ function IndustrySection() {
   );
 }
 
+function PrinciplesSection() {
+  const principles = [
+    {
+      title: "Our mission",
+      icon: Target,
+      text: "Make international shipping easier to manage with coordinated air, ocean, and overland options shaped around each customer's needs.",
+    },
+    {
+      title: "Our vision",
+      icon: Globe2,
+      text: "Connect businesses to global opportunities through trusted partnerships, adaptable logistics, and responsible growth.",
+    },
+    {
+      title: "Reliability, by design",
+      icon: ShieldCheck,
+      text: "Plan carefully around cargo and timing, coordinate each handoff, and keep communication clear from the first request to delivery.",
+    },
+  ];
+
+  return (
+    <section className="principles-section">
+      <div className="page-shell">
+        <div className="principles-heading">
+          <Eyebrow>What guides us</Eyebrow>
+          <h2>Global movement, built on trust.</h2>
+          <p>
+            Our mission, vision, and service principles shape the way we work with customers and
+            logistics partners.
+          </p>
+        </div>
+        <div className="principles-grid">
+          {principles.map(({ title, icon: Icon, text }) => (
+            <article className="principle-card" key={title}>
+              <Icon size={25} aria-hidden="true" />
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ContactBand() {
   return (
     <section className="contact-band">
@@ -678,9 +782,9 @@ export function AboutPage() {
   return (
     <main>
       <PageIntro
-        label="About Meridian"
-        title="More than logistics. A commitment to movement."
-        copy="An operational philosophy shaped around thoughtful planning, clear communication, and cargo handled with care."
+        label={`About ${company.name}`}
+        title="Connecting businesses across borders."
+        copy={`${company.tagline}, delivering safe, reliable, on-time service with global reach and local support.`}
       />
       <section className="about-feature">
         <div className="page-shell about-layout">
@@ -697,8 +801,8 @@ export function AboutPage() {
               handoff.
             </p>
             <p>
-              Meridian Freight is a brand concept awaiting the company’s verified history, mission,
-              team and operating details. This page intentionally does not invent them.
+              {company.name} is led by {company.proprietor}, bringing ocean freight, air freight,
+              land transport, and customs clearance together for businesses.
             </p>
             <Button asChild variant="outline">
               <Link to="/contact">
@@ -715,13 +819,13 @@ export function AboutPage() {
           />
         </div>
       </section>
+      <PrinciplesSection />
       <JourneySection />
       <section className="confirmation-strip">
         <div className="page-shell">
           <CircleHelp size={18} />
           <span>
-            Company history, leadership, locations and credentials have not been supplied and await
-            confirmation.
+            {company.proprietor} · Proprietor, {company.name}
           </span>
         </div>
       </section>
@@ -735,8 +839,8 @@ export function ServicesPage() {
     <main>
       <PageIntro
         label="Services"
-        title="End-to-end logistics. Without compromise."
-        copy="A starting point for your freight plan. All listed service areas are illustrative and must be confirmed against current company capabilities."
+        title="Your global logistics partner."
+        copy="Safe, reliable, on-time freight services with global reach and local support."
       />
       <section className="services-page page-shell">
         {services.map((service, index) => (
@@ -760,9 +864,7 @@ export function ServicesPage() {
               <h2>{service.title}</h2>
               <p>{service.text}</p>
               <span className="service-detail-tags">{service.detail}</span>
-              <p className="confirmation-note">
-                <CircleHelp size={14} /> Illustrative capability · confirm availability.
-              </p>
+              <p className="confirmation-note">Safe · Reliable · On time · Worldwide</p>
               <Button asChild variant="link">
                 <Link to="/quote">
                   Discuss this service <ArrowRight size={15} />
@@ -1123,8 +1225,8 @@ export function ContactPage() {
     <main>
       <PageIntro
         label="Contact"
-        title="Ready to ship? Let’s talk."
-        copy="Share a note with the team. Contact information and operating details are pending company confirmation."
+        title={`Contact ${company.name}.`}
+        copy={`${company.tagline}. Reach out to ${company.proprietor} for shipping and logistics enquiries.`}
       />
       <section className="contact-page-section">
         <div className="page-shell contact-page-layout">
@@ -1135,34 +1237,39 @@ export function ContactPage() {
               <br />
               right way forward.
             </h2>
-            <p>
-              Office address, phone, business email and hours will be added when verified company
-              details are available.
-            </p>
+            <p>{company.slogan}. Contact us by WhatsApp or email, or visit our Karachi office.</p>
             <div className="contact-pending">
               <MapPin size={17} />
               <span>
-                Company address
+                Office address
                 <br />
-                <strong>Awaiting confirmation</strong>
+                <strong>{company.address.join(" ")}</strong>
               </span>
             </div>
-            <div className="contact-pending">
-              <Headphones size={17} />
+            {company.phones.map((phone) => (
+              <a
+                className="contact-pending"
+                key={phone.whatsapp}
+                href={whatsappUrl(phone.whatsapp)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Headphones size={17} />
+                <span>
+                  WhatsApp
+                  <br />
+                  <strong>{phone.display}</strong>
+                </span>
+              </a>
+            ))}
+            <a className="contact-pending" href={`mailto:${company.email}`}>
+              <Mail size={17} />
               <span>
-                Business contact
+                Email
                 <br />
-                <strong>Awaiting confirmation</strong>
+                <strong>{company.email}</strong>
               </span>
-            </div>
-            <div className="contact-pending">
-              <Clock3 size={17} />
-              <span>
-                Business hours
-                <br />
-                <strong>Awaiting confirmation</strong>
-              </span>
-            </div>
+            </a>
           </div>
           <div className="contact-form-panel">
             {complete ? (

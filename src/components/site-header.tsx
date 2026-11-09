@@ -3,6 +3,7 @@ import { Menu, MoveUpRight, X } from "lucide-react";
 import { useState } from "react";
 import logo from "../assets/logo.png";
 import { Button } from "@/components/ui/button";
+import { company, whatsappUrl } from "@/lib/company";
 
 const links = [
   ["About", "/about"],
@@ -13,7 +14,12 @@ const links = [
 ] as const;
 
 function BrandLogo() {
-  return <img className="brand-logo" src={logo} alt="Meridian Freight" />;
+  return (
+    <span className="brand-logo-lockup">
+      <img className="brand-logo" src={logo} alt="" />
+      <span className="brand-logo-name">{company.name}</span>
+    </span>
+  );
 }
 
 export function SiteHeader() {
@@ -24,7 +30,7 @@ export function SiteHeader() {
         <Link
           to="/"
           className="brand-lockup"
-          aria-label="Meridian Freight home"
+          aria-label={`${company.name} home`}
           onClick={() => setOpen(false)}
         >
           <BrandLogo />
@@ -69,7 +75,7 @@ export function SiteFooter() {
           <Link to="/" className="brand-lockup">
             <BrandLogo />
           </Link>
-          <p>Moving business forward, one carefully planned shipment at a time.</p>
+          <p>{company.tagline}. {company.slogan}.</p>
         </div>
         <div className="footer-column">
           <span className="footer-heading">Explore</span>
@@ -83,22 +89,28 @@ export function SiteFooter() {
           <Link to="/quote">Request a quote</Link>
           <Link to="/contact">Contact</Link>
         </div>
-        <div className="footer-column">
-          <span className="footer-heading">Company details</span>
-          <span>
-            Contact and operating details
-            <br />
-            awaiting business confirmation.
-          </span>
+        <div className="footer-column footer-contact">
+          <span className="footer-heading">Contact</span>
+          {company.phones.map((phone) => (
+            <a
+              key={phone.whatsapp}
+              href={whatsappUrl(phone.whatsapp)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              WhatsApp {phone.display}
+            </a>
+          ))}
+          <a href={`mailto:${company.email}`}>{company.email}</a>
+          <address>{company.address.map((line) => <span key={line}>{line}</span>)}</address>
           <Link to="/contact">
-            Get in touch <MoveUpRight size={14} />
+            Contact us <MoveUpRight size={14} />
           </Link>
         </div>
       </div>
       <div className="page-shell footer-bottom">
         <span>
-          © {new Date().getFullYear()} Meridian Freight. Brand and content subject to business
-          confirmation.
+          © {new Date().getFullYear()} {company.name}. {company.tagline}.
         </span>
         <span>Privacy · Terms</span>
       </div>
