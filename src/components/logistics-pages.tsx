@@ -309,7 +309,11 @@ export function HomePage() {
     const video = videoRef.current;
 
     function playVideo() {
-      if (!video || document.visibilityState === "hidden") {
+      if (
+        !video ||
+        document.visibilityState === "hidden" ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
         video?.pause();
         return;
       }
@@ -339,11 +343,22 @@ export function HomePage() {
       }
     }
 
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotionPreference = () => {
+      if (motionPreference.matches) {
+        video?.pause();
+      } else {
+        playVideo();
+      }
+    };
+
     playVideo();
     document.addEventListener("visibilitychange", updateVisibility);
+    motionPreference.addEventListener("change", updateMotionPreference);
 
     return () => {
       document.removeEventListener("visibilitychange", updateVisibility);
+      motionPreference.removeEventListener("change", updateMotionPreference);
     };
   }, []);
 
@@ -377,7 +392,6 @@ export function HomePage() {
         <video
           ref={videoRef}
           className="hero-video"
-          autoPlay
           muted
           loop
           playsInline
