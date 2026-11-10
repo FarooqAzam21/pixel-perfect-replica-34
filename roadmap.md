@@ -1,4 +1,4 @@
 - [x] Build the responsive logistics pages and interaction flows.
 - [x] Add tracking and quote validation tests; verify locally.
 - [x] Check build output, preview interactions, responsive view, and commit changes.
-- [ ] Add contextual freight photography and subtle motion; verify desktop and mobile presentation.
+- [x] Add contextual freight photography and subtle motion; verify reduced-motion, desktop, and mobile presentation.
