@@ -1251,7 +1251,7 @@ export function ContactPage() {
               <br />
               right way forward.
             </h2>
-            <p>{company.slogan}. Contact us by WhatsApp or email, or visit our Karachi office.</p>
+            <p>{company.slogan}. Contact us via WhatsApp or email, or visit our Karachi office.</p>
             <div className="contact-pending">
               <MapPin size={17} />
               <span>
