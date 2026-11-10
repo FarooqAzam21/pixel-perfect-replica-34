@@ -13,10 +13,8 @@ import {
   MapPin,
   Menu,
   MoveUpRight,
-  Pause,
   Pill,
   Plane,
-  Play,
   Search,
   ShieldCheck,
   Ship,
@@ -302,37 +300,23 @@ function TrackingForm({ compact = false }: { compact?: boolean }) {
 
 export function HomePage() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const userPausedVideo = useRef(false);
-  const [videoPlaying, setVideoPlaying] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
 
     function playVideo() {
-      if (
-        !video ||
-        document.visibilityState === "hidden" ||
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      ) {
+      if (!video || document.visibilityState === "hidden") {
         video?.pause();
         return;
       }
 
-      if (userPausedVideo.current) {
-        return;
-      }
-
-      void video
-        .play()
-        .then(() => setVideoPlaying(!video.paused))
-        .catch((error: unknown) => {
-          setVideoPlaying(!video.paused);
-          if (!(
-            error instanceof DOMException && ["AbortError", "NotAllowedError"].includes(error.name)
-          )) {
-            console.error("Banner video playback failed", error);
-          }
-        });
+      void video.play().catch((error: unknown) => {
+        if (!(
+          error instanceof DOMException && ["AbortError", "NotAllowedError"].includes(error.name)
+        )) {
+          console.error("Banner video playback failed", error);
+        }
+      });
     }
 
     function updateVisibility() {
@@ -343,48 +327,13 @@ export function HomePage() {
       }
     }
 
-    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updateMotionPreference = () => {
-      if (motionPreference.matches) {
-        video?.pause();
-      } else {
-        playVideo();
-      }
-    };
-
     playVideo();
     document.addEventListener("visibilitychange", updateVisibility);
-    motionPreference.addEventListener("change", updateMotionPreference);
 
     return () => {
       document.removeEventListener("visibilitychange", updateVisibility);
-      motionPreference.removeEventListener("change", updateMotionPreference);
     };
   }, []);
-
-  function toggleVideoPlayback() {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (!video.paused) {
-      userPausedVideo.current = true;
-      video.pause();
-      return;
-    }
-
-    userPausedVideo.current = false;
-    void video
-      .play()
-      .then(() => setVideoPlaying(!video.paused))
-      .catch((error: unknown) => {
-        setVideoPlaying(!video.paused);
-        if (!(
-          error instanceof DOMException && ["AbortError", "NotAllowedError"].includes(error.name)
-        )) {
-          console.error("Banner video playback failed", error);
-        }
-      });
-  }
 
   return (
     <main>
@@ -392,14 +341,13 @@ export function HomePage() {
         <video
           ref={videoRef}
           className="hero-video"
+          autoPlay
           muted
           loop
           playsInline
           preload="auto"
           aria-hidden="true"
           tabIndex={-1}
-          onPlay={() => setVideoPlaying(true)}
-          onPause={() => setVideoPlaying(false)}
         >
           <source src={shipVideo} type="video/mp4" />
         </video>
@@ -432,20 +380,6 @@ export function HomePage() {
             Safe · Reliable · On time · Worldwide
           </div>
         </div>
-        <button
-          className="hero-video-toggle"
-          type="button"
-          onClick={toggleVideoPlayback}
-          aria-label={videoPlaying ? "Pause banner video" : "Play banner video"}
-          aria-pressed={videoPlaying}
-        >
-          {videoPlaying ? (
-            <Pause size={14} aria-hidden="true" />
-          ) : (
-            <Play size={14} aria-hidden="true" />
-          )}
-          {videoPlaying ? "Pause video" : "Play video"}
-        </button>
         <a className="scroll-cue" href="#tracking">
           <span>Scroll to explore</span>
           <ArrowDown size={15} />
