@@ -8,7 +8,7 @@ export const company = {
     { display: "+92 313 2289399", whatsapp: "923132289399" },
     { display: "+92 309 2744740", whatsapp: "923092744740" },
   ],
-  email: "saud@aashiping-logistics.com",
+  email: "saud@aashipping-logistics.com",
   address: [
     "Office No 1, Mezzanine Floor,",
     "Aslam Motiwala Palace,",
