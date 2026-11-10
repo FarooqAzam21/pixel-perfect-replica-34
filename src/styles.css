@@ -450,17 +450,6 @@
     transform: translateY(4px);
   }
 }
-.tracking-band {
-  background: var(--paper);
-  padding: 96px 0;
-}
-.tracking-layout {
-  display: grid;
-  grid-template-columns: 0.83fr 1.17fr;
-  align-items: start;
-  gap: 9%;
-}
-.tracking-heading h2,
 .section-heading-row h2,
 .journey-heading h2,
 .industry-head h2,
@@ -470,7 +459,6 @@
 .contact-band h2,
 .about-copy h2,
 .network-regions h2,
-.track-page-note h2,
 .contact-details h2 {
   font-size: clamp(36px, 4vw, 54px);
   font-weight: 500;
@@ -478,66 +466,10 @@
   line-height: 1.04;
   margin: 0;
 }
-.tracking-heading h2 span,
 .network-content h2 span,
 .contact-band h2 span {
   color: var(--electric);
 }
-.tracking-heading > p,
-.track-page-note > p {
-  color: var(--muted-foreground);
-  line-height: 1.7;
-  font-size: 14px;
-  max-width: 400px;
-  margin: 18px 0 0;
-}
-.tracking-form {
-  border: 1px solid var(--border);
-  background: var(--card);
-  padding: 26px;
-}
-.compact-tracking {
-  border: 0;
-  background: transparent;
-  padding: 0;
-}
-.tracking-search {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  min-height: 54px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  padding: 5px 5px 5px 15px;
-}
-.tracking-search label {
-  display: flex;
-  color: var(--steel);
-}
-.tracking-search input {
-  border: 0;
-  background: transparent;
-  outline: 0;
-  min-width: 0;
-  flex: 1;
-  height: 42px;
-  padding-inline: 12px;
-  color: var(--foreground);
-  font: 13px var(--font-sans);
-}
-.tracking-search input:focus-visible {
-  outline: 2px solid var(--ring);
-  outline-offset: 1px;
-}
-.tracking-search .button {
-  min-height: 42px;
-  border-radius: 2px;
-  background: var(--primary);
-  color: var(--primary-foreground);
-  font-size: 11px;
-  padding-inline: 17px;
-}
-.tracking-note,
 .confirmation-note {
   display: flex;
   align-items: flex-start;
@@ -546,159 +478,8 @@
   line-height: 1.5;
   color: var(--muted-foreground);
 }
-.tracking-note {
-  margin: 11px 0 0;
-}
-.tracking-note svg,
 .confirmation-note svg {
   flex: 0 0 auto;
-}
-.demo-code {
-  font-size: 10px;
-  color: var(--muted-foreground);
-  margin: 13px 0 0;
-}
-.demo-code button {
-  border: 0;
-  background: transparent;
-  color: var(--electric);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  cursor: pointer;
-  font: 600 10px var(--font-sans);
-  padding: 2px 3px;
-}
-.tracking-result {
-  margin-top: 20px;
-  border-top: 1px solid var(--border);
-  padding-top: 19px;
-}
-.tracking-result-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  gap: 10px;
-}
-.tracking-result-top .eyebrow {
-  font-size: 9px;
-  margin: 0 0 6px;
-}
-.tracking-result-top h3 {
-  font-size: 19px;
-  margin: 0;
-}
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: var(--soft-blue);
-  color: var(--primary);
-  padding: 7px 9px;
-  font-size: 9px;
-}
-.status-pill > span,
-.live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--electric);
-}
-.tracking-route {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 0;
-  border-block: 1px solid var(--border);
-}
-.tracking-route > div {
-  display: grid;
-  gap: 6px;
-}
-.tracking-route > svg {
-  color: var(--electric);
-}
-.route-label {
-  color: var(--steel);
-  font-size: 8px;
-  letter-spacing: 0.1em;
-}
-.tracking-route strong {
-  font-size: 12px;
-}
-.tracking-route .route-type {
-  margin-left: auto;
-  color: var(--muted-foreground);
-  font-size: 10px;
-  text-align: right;
-}
-.sample-warning {
-  background: var(--soft-blue);
-  padding: 10px 12px;
-  font-size: 10px;
-  color: var(--primary);
-  line-height: 1.5;
-}
-.tracking-timeline {
-  list-style: none;
-  padding: 3px 0 0;
-  margin: 0;
-  display: grid;
-}
-.tracking-timeline li {
-  display: flex;
-  gap: 12px;
-  min-height: 44px;
-  position: relative;
-}
-.tracking-timeline li:not(:last-child)::after {
-  position: absolute;
-  content: "";
-  width: 1px;
-  height: calc(100% - 20px);
-  top: 23px;
-  left: 10px;
-  background: var(--border);
-}
-.timeline-marker {
-  width: 21px;
-  height: 21px;
-  flex: 0 0 auto;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--border);
-  background: var(--card);
-  border-radius: 50%;
-  color: var(--steel);
-  font: 9px var(--font-sans);
-}
-.is-complete .timeline-marker {
-  background: var(--electric);
-  border-color: var(--electric);
-  color: var(--primary-foreground);
-}
-.tracking-timeline li > div {
-  display: grid;
-  gap: 3px;
-  align-content: start;
-}
-.tracking-timeline strong {
-  font-size: 11px;
-  font-weight: 600;
-}
-.tracking-timeline small {
-  font-size: 9px;
-  color: var(--muted-foreground);
-}
-.tracking-error {
-  margin: 15px 0 0;
-  padding: 12px;
-  border-left: 2px solid var(--destructive);
-  background: color-mix(in oklab, var(--destructive) 7%, var(--card));
-  color: var(--foreground);
-  font-size: 12px;
-  line-height: 1.5;
 }
 .services-section {
   padding-block: 110px 100px;
@@ -1503,35 +1284,6 @@
   grid-row: 2;
   color: var(--electric);
 }
-.track-page-section {
-  padding-block: 65px 90px;
-  background: var(--secondary);
-}
-.track-page-layout {
-  display: grid;
-  grid-template-columns: 0.72fr 1.28fr;
-  gap: 8%;
-  align-items: start;
-}
-.track-page-note h2 {
-  font-size: 39px;
-}
-.sample-number {
-  margin-top: 26px;
-  display: grid;
-  gap: 7px;
-  border-left: 2px solid var(--electric);
-  padding-left: 13px;
-}
-.sample-number > span {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--steel);
-}
-.sample-number > strong {
-  font: 600 13px var(--font-display);
-}
 .quote-page-section {
   padding-block: 62px 95px;
   background: var(--secondary);
@@ -1926,7 +1678,6 @@
     padding-inline: 11px;
     font-size: 13px;
   }
-  .tracking-layout,
   .network-content {
     grid-template-columns: 1fr;
     gap: 35px;
@@ -2043,13 +1794,6 @@
     bottom: 22px;
     font-size: 8px;
   }
-  .tracking-band {
-    padding: 65px 0;
-  }
-  .tracking-layout {
-    gap: 26px;
-  }
-  .tracking-heading h2,
   .section-heading-row h2,
   .journey-heading h2,
   .industry-head h2,
@@ -2059,35 +1803,6 @@
   .about-copy h2,
   .contact-details h2 {
     font-size: 39px;
-  }
-  .tracking-search {
-    flex-wrap: wrap;
-    padding: 7px 9px;
-  }
-  .tracking-search label {
-    margin-left: 3px;
-  }
-  .tracking-search input {
-    width: calc(100% - 40px);
-    flex: auto;
-  }
-  .tracking-search .button {
-    width: 100%;
-  }
-  .tracking-form {
-    padding: 17px;
-  }
-  .compact-tracking {
-    padding: 0;
-  }
-  .tracking-route {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .tracking-route .route-type {
-    margin-left: 0;
-    width: 100%;
-    text-align: left;
   }
   .services-section {
     padding-block: 75px;
@@ -2289,19 +2004,14 @@
     border-right: 0;
     padding-inline: 0;
   }
-  .track-page-section,
   .quote-page-section,
   .contact-page-section {
     padding-block: 45px 65px;
   }
-  .track-page-layout,
   .quote-layout,
   .contact-page-layout {
     grid-template-columns: 1fr;
     gap: 28px;
-  }
-  .track-page-note h2 {
-    font-size: 34px;
   }
   .quote-stepper {
     display: flex;
@@ -2615,32 +2325,16 @@
   box-shadow: 0 0 0 5px color-mix(in oklab, var(--electric) 14%, transparent);
   transform: scale(1.05);
 }
-.tracking-result,
-.tracking-error {
-  animation: result-enter 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-@keyframes result-enter {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 .field input,
 .field select,
-.field textarea,
-.tracking-search {
+.field textarea {
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 .field input:focus,
 .field select:focus,
-.field textarea:focus,
-.tracking-search:focus-within {
+.field textarea:focus {
   border-color: var(--electric);
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--electric) 12%, transparent);
 }
@@ -2730,11 +2424,7 @@
     .map-topline,
     .map-legend,
     .map-disclaimer,
-    .tracking-note,
-    .demo-code,
     .service-number,
-    .status-pill,
-    .route-label,
     .journey-number,
     .footer-bottom
   ) {

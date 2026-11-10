@@ -15,7 +15,6 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as NetworkRouteImport } from './routes/network'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ServicesRouteImport } from './routes/services'
-import { Route as TrackRouteImport } from './routes/track'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -47,11 +46,6 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TrackRoute = TrackRouteImport.update({
-  id: '/track',
-  path: '/track',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -60,7 +54,6 @@ export interface FileRoutesByFullPath {
   '/network': typeof NetworkRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
-  '/track': typeof TrackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -69,7 +62,6 @@ export interface FileRoutesByTo {
   '/network': typeof NetworkRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
-  '/track': typeof TrackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -79,15 +71,12 @@ export interface FileRoutesById {
   '/network': typeof NetworkRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
-  '/track': typeof TrackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    '/' | '/about' | '/contact' | '/network' | '/quote' | '/services' | '/track'
+  fullPaths: '/' | '/about' | '/contact' | '/network' | '/quote' | '/services'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    '/' | '/about' | '/contact' | '/network' | '/quote' | '/services' | '/track'
+  to: '/' | '/about' | '/contact' | '/network' | '/quote' | '/services'
   id:
     | '__root__'
     | '/'
@@ -96,7 +85,6 @@ export interface FileRouteTypes {
     | '/network'
     | '/quote'
     | '/services'
-    | '/track'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,7 +94,6 @@ export interface RootRouteChildren {
   NetworkRoute: typeof NetworkRoute
   QuoteRoute: typeof QuoteRoute
   ServicesRoute: typeof ServicesRoute
-  TrackRoute: typeof TrackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -153,13 +140,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/track': {
-      id: '/track'
-      path: '/track'
-      fullPath: '/track'
-      preLoaderRoute: typeof TrackRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -170,7 +150,6 @@ const rootRouteChildren: RootRouteChildren = {
   NetworkRoute: NetworkRoute,
   QuoteRoute: QuoteRoute,
   ServicesRoute: ServicesRoute,
-  TrackRoute: TrackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

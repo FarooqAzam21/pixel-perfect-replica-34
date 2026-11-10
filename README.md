@@ -1,8 +1,8 @@
 # Meridian Freight
 
-A responsive freight and logistics marketing-site prototype built with TanStack Start. It includes overview, services, network, shipment tracking, quote request, about, and contact pages.
+A responsive freight and logistics marketing-site prototype built with TanStack Start. It includes overview, services, network, quote request, about, and contact pages.
 
-Tracking records, service capabilities, network routes, and company details are illustrative. Quote and contact forms only prepare data locally; no carrier or submission service is connected.
+Service capabilities, network routes, and company details are illustrative. Quote and contact forms only prepare data locally; no submission service is connected.
 
 ## Development
 

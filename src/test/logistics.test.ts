@@ -1,23 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  demoTrackingCode,
-  lookupTracking,
-  emptyQuote,
-  validateContact,
-  validateShipment,
-} from "@/lib/logistics";
-
-describe("shipment tracking demonstration", () => {
-  it("returns only the explicitly labeled sample for its sample code", () => {
-    expect(lookupTracking(demoTrackingCode)?.updated).toContain("not live shipment data");
-  });
-  it("normalizes whitespace and letter casing for the sample reference", () => {
-    expect(lookupTracking(`  ${demoTrackingCode.toLowerCase()}  `)?.code).toBe(demoTrackingCode);
-  });
-  it("does not invent results for unknown identifiers", () => {
-    expect(lookupTracking("REAL-CARRIER-CODE")).toBeNull();
-  });
-});
+import { emptyQuote, validateContact, validateShipment } from "@/lib/logistics";
 
 describe("quote form validation", () => {
   it("requires shipment fields before proceeding", () => {

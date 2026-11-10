@@ -5,7 +5,6 @@ import { ContactFab } from "@/components/contact-fab";
 const motionTargets = [
   ".site-shell main > section:not(.home-hero) h2",
   ".site-shell main > section.page-intro h1",
-  ".site-shell main .tracking-layout > *",
   ".site-shell main .section-heading-row",
   ".site-shell main .service-feature",
   ".site-shell main .freight-modes-heading",
@@ -21,7 +20,6 @@ const motionTargets = [
   ".site-shell main .network-regions > *",
   ".site-shell main .region-list > div",
   ".site-shell main .freight-mode-card",
-  ".site-shell main .track-page-section > *",
   ".site-shell main .quote-layout > *",
   ".site-shell main .contact-page-layout > *",
   ".site-shell main .contact-band-content > *",

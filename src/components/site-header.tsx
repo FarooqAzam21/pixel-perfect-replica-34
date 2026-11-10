@@ -9,7 +9,6 @@ const links = [
   ["About", "/about"],
   ["Services", "/services"],
   ["Network", "/network"],
-  ["Track", "/track"],
   ["Contact", "/contact"],
 ] as const;
 
@@ -75,7 +74,9 @@ export function SiteFooter() {
           <Link to="/" className="brand-lockup">
             <BrandLogo />
           </Link>
-          <p>{company.tagline}. {company.slogan}.</p>
+          <p>
+            {company.tagline}. {company.slogan}.
+          </p>
         </div>
         <div className="footer-column">
           <span className="footer-heading">Explore</span>
@@ -84,8 +85,7 @@ export function SiteFooter() {
           <Link to="/network">Global network</Link>
         </div>
         <div className="footer-column">
-          <span className="footer-heading">Shipments</span>
-          <Link to="/track">Track shipment</Link>
+          <span className="footer-heading">Get started</span>
           <Link to="/quote">Request a quote</Link>
           <Link to="/contact">Contact</Link>
         </div>
@@ -102,7 +102,11 @@ export function SiteFooter() {
             </a>
           ))}
           <a href={`mailto:${company.email}`}>{company.email}</a>
-          <address>{company.address.map((line) => <span key={line}>{line}</span>)}</address>
+          <address>
+            {company.address.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
+          </address>
           <Link to="/contact">
             Contact us <MoveUpRight size={14} />
           </Link>

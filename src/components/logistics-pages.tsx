@@ -15,7 +15,6 @@ import {
   MoveUpRight,
   Pill,
   Plane,
-  Search,
   ShieldCheck,
   Ship,
   Target,
@@ -35,9 +34,7 @@ import shipVideo from "@/assets/Cargo_ship_sailing_ocean_62d7a438.mp4";
 import warehouseImage from "@/assets/warehouse.jpg";
 import { Button } from "@/components/ui/button";
 import {
-  demoTrackingCode,
   emptyQuote,
-  lookupTracking,
   quoteSteps,
   validateContact,
   validateShipment,
@@ -51,7 +48,7 @@ const services = [
     number: "01",
     title: "International Air Freight",
     detail: "Fast · Reliable · Global markets",
-    text: "Fast and reliable air freight solutions connecting major global markets. We ensure speedy delivery with real-time tracking and end-to-end service.",
+    text: "Fast and reliable air freight solutions connecting major global markets, with coordinated handling from origin to destination.",
     icon: Plane,
     image: airCargoImage,
   },
@@ -95,8 +92,8 @@ const services = [
     id: "international-ocean-freight",
     number: "06",
     title: "International Ocean Freight",
-    detail: "FCL · LCL · Worldwide",
-    text: "Cost-effective ocean freight services for FCL and LCL shipments worldwide. We offer flexible schedules, competitive rates, and full visibility throughout transit.",
+    detail: "FCL · LCL · Special equipment",
+    text: "Cost-effective ocean freight services worldwide, including Break Bulk, Flat Rack, and Open Top options for cargo that needs specialized loading or handling.",
     icon: Ship,
     image: containerShipImage,
   },
@@ -207,97 +204,6 @@ function PageIntro({ label, title, copy }: { label: string; title: string; copy:
   );
 }
 
-function TrackingForm({ compact = false }: { compact?: boolean }) {
-  const [code, setCode] = useState("");
-  const [result, setResult] = useState<ReturnType<typeof lookupTracking>>(null);
-  const [searched, setSearched] = useState(false);
-  function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSearched(true);
-    setResult(lookupTracking(code));
-  }
-  return (
-    <div className={compact ? "tracking-form compact-tracking" : "tracking-form"}>
-      <form onSubmit={submit} className="tracking-search">
-        <label htmlFor={compact ? "track-home" : "track-page"}>
-          <Search size={18} /> <span className="sr-only">Tracking number</span>
-        </label>
-        <input
-          id={compact ? "track-home" : "track-page"}
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          placeholder="Enter your tracking number"
-          required
-          aria-describedby="tracking-note"
-        />
-        <Button type="submit">
-          Track shipment <ArrowRight size={16} />
-        </Button>
-      </form>
-      <p id="tracking-note" className="tracking-note">
-        <CircleHelp size={14} /> Demonstration mode · no live carrier connection
-      </p>
-      {searched &&
-        (result ? (
-          <div className="tracking-result" aria-live="polite">
-            <div className="tracking-result-top">
-              <div>
-                <Eyebrow>Sample shipment · demonstration only</Eyebrow>
-                <h3>{result.code}</h3>
-              </div>
-              <span className="status-pill">
-                <span />
-                {result.status}
-              </span>
-            </div>
-            <div className="tracking-route">
-              <div>
-                <span className="route-label">ORIGIN</span>
-                <strong>{result.origin}</strong>
-              </div>
-              <ArrowRight size={18} />
-              <div>
-                <span className="route-label">DESTINATION</span>
-                <strong>{result.destination}</strong>
-              </div>
-              <div className="route-type">{result.mode}</div>
-            </div>
-            <p className="sample-warning">
-              {result.updated}. These milestones are illustrative and do not describe a real
-              shipment.
-            </p>
-            <ol className="tracking-timeline">
-              {result.events.map((event, index) => (
-                <li key={event.title} className={event.complete ? "is-complete" : ""}>
-                  <span className="timeline-marker">
-                    {event.complete ? <Check size={12} /> : String(index + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <strong>{event.title}</strong>
-                    <small>{event.detail}</small>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        ) : (
-          <p className="tracking-error" role="status">
-            No demonstration record matches that number. This site is not connected to a carrier
-            tracking system.
-          </p>
-        ))}
-      {!searched && (
-        <p className="demo-code">
-          Try the sample reference{" "}
-          <button type="button" onClick={() => setCode(demoTrackingCode)}>
-            {demoTrackingCode}
-          </button>
-        </p>
-      )}
-    </div>
-  );
-}
-
 export function HomePage() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -370,8 +276,8 @@ export function HomePage() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="hero-outline">
-              <Link to="/track">
-                Track a shipment <ArrowRight size={16} />
+              <Link to="/services">
+                Explore services <ArrowRight size={16} />
               </Link>
             </Button>
           </div>
@@ -380,7 +286,7 @@ export function HomePage() {
             Safe · Reliable · On time · Worldwide
           </div>
         </div>
-        <a className="scroll-cue" href="#tracking">
+        <a className="scroll-cue" href="#services">
           <span>Scroll to explore</span>
           <ArrowDown size={15} />
         </a>
@@ -388,24 +294,7 @@ export function HomePage() {
           <span>01</span> / GLOBAL MOVEMENT
         </div>
       </section>
-      <section id="tracking" className="tracking-band">
-        <div className="page-shell tracking-layout">
-          <div className="tracking-heading">
-            <Eyebrow>Shipment visibility</Eyebrow>
-            <h2>
-              Your shipment.
-              <br />
-              <span>Every step of the way.</span>
-            </h2>
-            <p>
-              Look up an example reference in demonstration mode. Live carrier tracking is not
-              connected.
-            </p>
-          </div>
-          <TrackingForm compact />
-        </div>
-      </section>
-      <section className="services-section page-shell">
+      <section id="services" className="services-section page-shell">
         <div className="section-heading-row">
           <div>
             <Eyebrow>What we move</Eyebrow>
@@ -917,35 +806,6 @@ export function NetworkPage() {
   );
 }
 
-export function TrackPage() {
-  return (
-    <main>
-      <PageIntro
-        label="Shipment visibility"
-        title="Your shipment. Every step of the way."
-        copy="Enter a reference to try the sample tracker. Live tracking is not connected, and the example never represents a real shipment."
-      />
-      <section className="track-page-section">
-        <div className="page-shell track-page-layout">
-          <div className="track-page-note">
-            <Eyebrow>Demonstration mode</Eyebrow>
-            <h2>One place to follow the journey.</h2>
-            <p>
-              Use the sample reference below to explore an illustrative timeline. No live shipment
-              records are available here.
-            </p>
-            <div className="sample-number">
-              <span>Sample reference</span>
-              <strong>{demoTrackingCode}</strong>
-            </div>
-          </div>
-          <TrackingForm />
-        </div>
-      </section>
-    </main>
-  );
-}
-
 const inputFields: {
   name: keyof QuoteDetails;
   label: string;
@@ -995,7 +855,12 @@ const inputFields: {
     type: "number",
     required: true,
   },
-  { name: "container", label: "Container type", placeholder: "If applicable" },
+  {
+    name: "container",
+    label: "Container type",
+    placeholder: "Select if applicable",
+    options: ["Break Bulk", "Flat Rack", "Open Top"],
+  },
 ];
 const contactFields = [
   { name: "fullName", label: "Full name", placeholder: "Your name", required: true },
@@ -1111,8 +976,11 @@ export function QuotePage() {
                             value={details[field.name]}
                             onChange={(e) => change(field.name, e.target.value)}
                           >
+                            {field.placeholder && <option value="">{field.placeholder}</option>}
                             {field.options.map((option) => (
-                              <option key={option}>{option}</option>
+                              <option key={option} value={option}>
+                                {option}
+                              </option>
                             ))}
                           </select>
                         ) : (
